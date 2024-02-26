@@ -11,7 +11,7 @@ def get(url):
     return html
 
 def write(filename, html):
-    with open(path+f"pages/{filename}.html", 'w') as f:
+    with open(path+f"pages/{filename}.html", 'w', encoding="utf-8") as f:
         f.write(html)
         
 def load(filename):
@@ -20,6 +20,7 @@ def load(filename):
             html = f.read()
     except Exception as e:
         print(e)
+        html = "something went wrong"
     return html
 
 def getLastPageNo(html):

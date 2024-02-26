@@ -2,12 +2,12 @@ import crawler
 from bs4 import BeautifulSoup
 
 
-def get(name, link, page, refresh=False):  
+def get(name, url, page="", refresh=False):  
     if(refresh):
-        html = crawler.get(link)
-        crawler.write(name+"_"+page, html)
+        html = crawler.get(url)
+        crawler.write(name+page, html)
     else:
-        html = crawler.load(name+"_"+page)
+        html = crawler.load(name+page)
     
     return html
         
@@ -31,4 +31,11 @@ def fetchNumbers(html):
             print(e)
     return numbers
     
-    
+def getPageNo(main_url, name, page_no, refresh=False):
+    html = get(
+        name = name,
+        url = main_url+"page"+str(page_no),
+        page = "_"+str(page_no),
+        refresh = refresh
+        )
+    return html

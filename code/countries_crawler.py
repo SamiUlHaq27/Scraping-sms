@@ -1,25 +1,17 @@
 import crawler
 from bs4 import BeautifulSoup
 
-def getCountries(refresh=False):
-    urls = [
-        "https://temporary-phone-number.com/countrys/",
-        "https://temporary-phone-number.com/countrys/page2"
-        ]
+
+
+def get(url="https://temporary-phone-number.com/countrys/" ,page="", refresh=False):
 
     if(refresh):
-        html1 = crawler.get(urls[0])
-        html2 = crawler.get(urls[1])
-        crawler.write("cpage1", html1)
-        crawler.write("cpage2", html2)
+        html = crawler.get(url)
+        crawler.write("cpage"+page, html)
     else:
-        html1 = crawler.load("cpage1")
-        html2 = crawler.load("cpage2")
+        html = crawler.load("cpage"+page)
 
-    countries_p1 = fetch_countries(html1)
-    countries_p2 = fetch_countries(html2)
-    
-    return countries_p1 + countries_p2
+    return html
 
 def fetch_countries(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -34,3 +26,11 @@ def fetch_countries(html):
         })
     
     return countries
+
+def getTotalPages(html):
+    no = crawler.getLastPageNo(html)
+    return no
+
+def getPageNo(no, refresh=False):
+    html = get(url="https://temporary-phone-number.com/countrys/"+"page"+str(no), page=str(no), refresh=refresh)
+    return html
