@@ -1,2 +1,3 @@
 # Scraping-sms
-Scrapy project for scraping free sms numbers from web.
+
+Selenium web scraping for sms and phone numbers from temporary-phone-number.com
